@@ -1,0 +1,3 @@
+set(CONAN_COVERXYGEN_INSTALLER_ROOT "C:/Users/mjvk/.conan/data/coverxygen_installer/1.6/_/_/package/456f15897172eef340fcbac8a70811f2beb26a93")
+set(CMAKE_MODULE_PATH "C:/Users/mjvk/.conan/data/coverxygen_installer/1.6/_/_/package/456f15897172eef340fcbac8a70811f2beb26a93/" ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR})
+set(CMAKE_PREFIX_PATH "C:/Users/mjvk/.conan/data/coverxygen_installer/1.6/_/_/package/456f15897172eef340fcbac8a70811f2beb26a93/" ${CMAKE_PREFIX_PATH} ${CMAKE_CURRENT_LIST_DIR})
