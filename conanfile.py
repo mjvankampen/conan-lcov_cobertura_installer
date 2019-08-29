@@ -1,6 +1,6 @@
 from conans import ConanFile
 from conans import tools
-import PyInstaller.__main__
+import subprocess
 import os
 import codecs
 
@@ -32,20 +32,11 @@ class LcovCoberturaConan(ConanFile):
         os.rename("lcov-to-cobertura-xml-%s" % self.version, self._source_subfolder)
         
     def build(self):
-        import pip
-        #if hasattr(pip, "main"):
-        #    pip.main(["install","lxml"])
-        #else:
-        #    from pip._internal import main
-        #    main(["install", "PyInstaller","lxml"])
+        subprocess.call("pip install pyinstaller", shell=True)
         mainfilename = os.path.join(self._source_subfolder,"lcov_cobertura","lcov_cobertura.py")
         self._makeAbsoluteImport(mainfilename)
-        PyInstaller.__main__.run([  '--name=%s' % "lcov_cobertura", 
-                                    '--onefile', \
-                                    '--workpath', os.path.join(self.build_folder,"build"),\
-                                    '--distpath', os.path.join(self.build_folder,"bin"),\
-                                    '--specpath', self.build_folder,\
-                                    mainfilename])
+        self._makeAbsoluteImport(mainfilename)
+        subprocess.call('pyinstaller %s --name lcov_cobertura --onefile --workpath %s --distpath %s --specpath %s' % (mainfilename, os.path.join(self.build_folder,"build"), os.path.join(self.build_folder,"bin"), self.build_folder), shell=True)
 
     def package(self):
         self.copy("*lcov_cobertura", dst="bin", src="bin", keep_path=False)
